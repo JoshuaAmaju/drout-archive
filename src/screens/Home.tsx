@@ -1,9 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { navigate } from "@reach/router";
+import View from "../components/View";
+import CurrentWeather from "../components/CurrentWeather";
+// import { navigate } from "@reach/router";
 
 function Home() {
-  return <div></div>;
+  return (
+    <View>
+      <CurrentWeather latitude={0} longitude={0} />
+    </View>
+  );
 }
 
 Home.propTypes = {
