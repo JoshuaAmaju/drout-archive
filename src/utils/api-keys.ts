@@ -1,0 +1,5 @@
+export const OPEN_WEATHER_MAP_API_KEY = "f5590cb773a8961f4c9aa7f2c12ab2a6";
+
+export const MAPBOX_GL_ACCESS_TOKEN = `
+pk.eyJ1IjoicG9sYXJpc2RpZ2kiLCJhIjoiY2pyNmRmY2g0MjZ4cjQ5cXFibDVha2ttNyJ9._JCsNVmInI38V66FiqT71A
+`;
