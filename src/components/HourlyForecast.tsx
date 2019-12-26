@@ -55,6 +55,7 @@ function HourlyForecast(props: any) {
   }, [send, latitude, longitude]);
 
   useEffect(() => {
+      localStorage.setItem('hourly-data', JSON.stringify(data))
     console.log(data);
   }, [data]);
 
