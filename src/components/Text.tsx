@@ -1,18 +1,37 @@
 import React from "react";
-import PropTypes from "prop-types";
+import classNames from "classnames";
+import { css, StyleSheet, CSSProperties } from "aphrodite";
 
-function Text(props: any) {
-  let { type = "p", children, className } = props;
-  let Type = type;
-  return <Type className={className}>{children}</Type>;
+export enum TextTypes {
+  P = "p",
+  H1 = "h1",
+  H2 = "h2",
+  H3 = "h3",
+  H4 = "h4",
+  H5 = "h5",
+  H6 = "h6",
+  SUP = "sup",
+  SPAN = "span"
 }
 
-Text.defaultTypes = {};
+type TextProps = {
+  type?: TextTypes;
+  children?: string;
+  className?: string;
+  style?: CSSProperties;
+};
 
-Text.propTypes = {
-  type: PropTypes.string,
-  children: PropTypes.string,
-  className: PropTypes.string
+const Text: React.FC<TextProps> = (props: any) => {
+  let { type = "p", style, children, className } = props;
+  let Type = type;
+
+  let textStyle = StyleSheet.create({ Text: { ...style } });
+
+  return (
+    <Type className={classNames(css(textStyle.Text), className)}>
+      {children}
+    </Type>
+  );
 };
 
 export default Text;

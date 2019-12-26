@@ -16,7 +16,9 @@ interface WeatherContext {
   longitude: number;
 }
 
-type WeatherEvents = { type: "FETCH" } | { type: "RETRY" };
+type WeatherEvents =
+  | { type: "FETCH"; latitude: number; longitude: number }
+  | { type: "RETRY" };
 
 export const weatherMachine = Machine<
   WeatherContext,
@@ -24,7 +26,7 @@ export const weatherMachine = Machine<
   WeatherEvents
 >(
   {
-    initial: "loading",
+    initial: "idle",
     id: "weather-machine",
     context: {
       latitude: 0,
@@ -38,10 +40,6 @@ export const weatherMachine = Machine<
         }
       },
       loading: {
-        onEntry: assign((ctx, ev: any) => {
-          let { latitude, longitude } = ev;
-          return { latitude, longitude };
-        }),
         invoke: {
           src: "fetch",
           onDone: {
@@ -67,6 +65,7 @@ export const weatherMachine = Machine<
     actions: {
       formatData: assign({
         data: (ctx, ev: { data: any }) => {
+          console.log(ev.data);
           return formatWeatherData(ev.data);
         }
       })

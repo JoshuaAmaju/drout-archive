@@ -1,14 +1,28 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { css } from "aphrodite";
+import classNames from "classnames";
+import { StyleSheet, CSSProperties } from "aphrodite";
 
-function View(props: any) {
-  let { className, children } = props;
-  return <div className={className}>{children}</div>;
-}
+type ViewProps = {
+  className?: string;
+  style?: CSSProperties;
+  children?: React.ReactNode;
+};
 
-View.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
+const View: React.FC<ViewProps> = (props: any) => {
+  let { style, children, className } = props;
+
+  let viewStyle = StyleSheet.create({
+    View: {
+      display: "flex",
+      flexDirection: "row",
+      ...style
+    }
+  });
+
+  return (
+    <div className={classNames(css(viewStyle.View), className)}>{children}</div>
+  );
 };
 
 export default View;

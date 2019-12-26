@@ -9,8 +9,8 @@ export function useLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         position => {
-          setLoading(false);
           setState(position.coords);
+          setLoading(false);
         },
         error => {
           setError(error);
