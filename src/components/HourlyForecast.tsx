@@ -112,7 +112,6 @@ function HourlyForecast(props: any) {
 }
 
 HourlyForecast.propTypes = {
-  style: PropTypes.object,
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired
 };
