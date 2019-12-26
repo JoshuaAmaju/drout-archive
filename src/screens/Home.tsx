@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import View from "../components/View";
 import CurrentWeather from "../components/CurrentWeather";
 import { useLocation } from "../hooks/use-location";
-import bg from "../assets/images/current-temperature-bg.jpg";
+import HourlyForecast from "../components/HourlyForecast";
 // import { navigate } from "@reach/router";
 
 function Home() {
@@ -16,6 +16,7 @@ function Home() {
   return (
     <View style={{ padding: "1rem", height: "100vh", flexDirection: "column" }}>
       <CurrentWeather latitude={latitude} longitude={longitude} />
+      <HourlyForecast latitude={latitude} longitude={longitude} />
     </View>
   );
 }

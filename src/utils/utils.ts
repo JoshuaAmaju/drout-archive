@@ -28,3 +28,27 @@ export function formatWeatherData(data: any) {
     temperatureMin: temp_min
   };
 }
+
+export const DAYS_OF_THE_WEEK = [
+  "Sun",
+  "Mon",
+  "Tue",
+  "Weds",
+  "Thurs",
+  "Fri",
+  "Sat"
+];
+
+export const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
