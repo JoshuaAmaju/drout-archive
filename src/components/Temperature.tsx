@@ -4,11 +4,12 @@ import Text, { TextTypes } from "./Text";
 
 type Value = {
   value: number;
+  className?: string
 };
 
 const Temperature: React.FC<Value> = (props: any) => {
   return (
-    <View>
+    <View className={props.className}>
       <Text>{props.value}</Text>
       <Text
         type={TextTypes.SUP}

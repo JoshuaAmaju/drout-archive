@@ -48,9 +48,9 @@ function CurrentWeather(props: any) {
     send({ type: "FETCH", latitude, longitude });
   }, [send, latitude, longitude]);
 
-  useEffect(() => {
-    console.log(current.context);
-  }, [current]);
+  // useEffect(() => {
+  //   console.log(current.context);
+  // }, [current]);
 
   const DetailItem = (props: any) => {
     let { icon, title, detail } = props;
