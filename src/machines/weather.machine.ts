@@ -1,5 +1,6 @@
 import { Machine, assign } from "xstate";
 import { formatWeatherData } from "../utils/utils";
+import { fetchCurrentData } from "../services/weather.service";
 
 interface WeatherStateSchema {
   states: {
@@ -69,6 +70,12 @@ export const weatherMachine = Machine<
           return formatWeatherData(ev.data);
         }
       })
+    },
+    services: {
+      fetch: (ctx, ev) => {
+        let { latitude, longitude } = ctx;
+        return fetchCurrentData({ latitude, longitude });
+      }
     }
   }
 );

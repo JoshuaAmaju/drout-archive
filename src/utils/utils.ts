@@ -21,11 +21,11 @@ export function formatWeatherData(data: any) {
     dateTime: dt,
     windSpeed: speed,
     weatherIcon: icon,
-    temperature: temp,
     feelsLike: feels_like,
     weatherCondition: main,
     temperatureMax: temp_max,
-    temperatureMin: temp_min
+    temperatureMin: temp_min,
+    temperature: temp ? temp.toFixed(0) : temp
   };
 }
 

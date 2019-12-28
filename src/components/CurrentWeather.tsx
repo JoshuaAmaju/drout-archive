@@ -21,16 +21,7 @@ function CurrentWeather(props: any) {
   let { latitude, longitude } = props;
 
   let [current, send] = useMachine(
-    weatherMachine
-      .withConfig({
-        services: {
-          fetch: (ctx, ev) => {
-            let { latitude, longitude } = ctx;
-            return fetchCurrentData({ latitude, longitude });
-          }
-        }
-      })
-      .withContext({ latitude, longitude })
+    weatherMachine.withContext({ latitude, longitude })
   );
 
   let {
@@ -47,10 +38,6 @@ function CurrentWeather(props: any) {
   useEffect(() => {
     send({ type: "FETCH", latitude, longitude });
   }, [send, latitude, longitude]);
-
-  // useEffect(() => {
-  //   console.log(current.context);
-  // }, [current]);
 
   const DetailItem = (props: any) => {
     let { icon, title, detail } = props;
@@ -69,7 +56,10 @@ function CurrentWeather(props: any) {
 
   return (
     <View style={{ flexDirection: "column" }}>
-      <Text type={TextTypes.H2} style={{ marginBottom: "1rem" }}>
+      <Text
+        type={TextTypes.H2}
+        style={{ marginBottom: "1rem", alignSelf: "flex-end" }}
+      >
         {`${city}, ${country}`}
       </Text>
       <View
@@ -90,7 +80,7 @@ function CurrentWeather(props: any) {
               fontWeight: "bold"
             }}
           >
-            {temperature.toFixed(0)}
+            {temperature}
           </Text>
           <Text
             type={TextTypes.SUP}

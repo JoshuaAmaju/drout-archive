@@ -1,9 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
-import View from "../components/View";
-import CurrentWeather from "../components/CurrentWeather";
+import React from "react";
+import Details from "../components/Details";
 import { useLocation } from "../hooks/use-location";
-import HourlyForecast from "../components/HourlyForecast";
+import Cities from "../components/Cities";
+import View from "../components/View";
 // import { navigate } from "@reach/router";
 
 function Home() {
@@ -14,9 +14,10 @@ function Home() {
   };
 
   return (
-    <View style={{ padding: "1rem", height: "100vh", flexDirection: "column" }}>
-      <CurrentWeather latitude={latitude} longitude={longitude} />
-      <HourlyForecast latitude={latitude} longitude={longitude} />
+    <View style={{ flexDirection: "column", padding: "1rem", height: "100vh" }}>
+      <Details latitude={latitude} longitude={longitude} />
+      <View style={{ height: "1rem" }}></View>
+      <Cities default={{ latitude, longitude }} />
     </View>
   );
 }

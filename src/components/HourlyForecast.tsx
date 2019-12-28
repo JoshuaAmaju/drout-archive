@@ -55,13 +55,13 @@ function HourlyForecast(props: any) {
   }, [send, latitude, longitude]);
 
   useEffect(() => {
-      localStorage.setItem('hourly-data', JSON.stringify(data))
+    localStorage.setItem("hourly-data", JSON.stringify(data));
     console.log(data);
   }, [data]);
 
   return (
     <View style={{ flexDirection: "column" }}>
-      <Text type={TextTypes.H2} style={{ margin: "1rem 0" }}>
+      <Text type={TextTypes.H2} style={{ marginBottom: "1rem" }}>
         Hourly weather
       </Text>
       {data && (
@@ -101,7 +101,7 @@ function HourlyForecast(props: any) {
                 />
                 <Temperature
                   className={css(style.marginTop)}
-                  value={temperature.toFixed(0)}
+                  value={temperature}
                 />
                 <Text>{description}</Text>
               </View>
@@ -109,6 +109,7 @@ function HourlyForecast(props: any) {
           })}
         </ul>
       )}
+      {!data && <Text>Couldn't get hourly weather data.</Text>}
     </View>
   );
 }
