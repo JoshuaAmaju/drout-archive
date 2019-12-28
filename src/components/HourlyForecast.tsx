@@ -103,6 +103,7 @@ function HourlyForecast(props: any) {
                   className={css(style.marginTop)}
                   value={temperature.toFixed(0)}
                 />
+                <Text>{description}</Text>
               </View>
             );
           })}
