@@ -1,7 +1,6 @@
 import React from "react";
-import { css } from "aphrodite";
 import classNames from "classnames";
-import { StyleSheet, CSSProperties } from "aphrodite";
+import { css, StyleSheet, CSSProperties } from "aphrodite";
 
 type ViewProps = {
   className?: string;

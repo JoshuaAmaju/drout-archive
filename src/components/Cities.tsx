@@ -8,6 +8,9 @@ import Temperature from "./Temperature";
 import { css, StyleSheet } from "aphrodite";
 import "../styles/cities.css";
 import { ReactComponent as Plus } from "../assets/svg/plus.svg";
+import Modal from "./Modal";
+import "../styles/utils.css";
+import TextInput from "./TextInput";
 
 type CityProps = {
   latitude: number;
@@ -17,6 +20,7 @@ type CityProps = {
 
 const City: React.FC<CityProps> = props => {
   let { latitude, longitude, className } = props;
+
   let [current, send] = useMachine(
     weatherMachine.withContext({
       latitude,
@@ -76,6 +80,7 @@ type CitiesProps = {
 };
 
 const Cities: React.FC<CitiesProps> = props => {
+  let [open, setMode] = useState(false);
   let { latitude, longitude } = props.default;
   let [cities, setCity]: any = useState([{ latitude, longitude }]);
 
@@ -93,7 +98,7 @@ const Cities: React.FC<CitiesProps> = props => {
   return (
     <View style={{ flexDirection: "column" }}>
       <Text type={TextTypes.H2} style={{ marginBottom: "1rem" }}>
-        Cities
+        Locations
       </Text>
       <View style={{ flexWrap: "wrap" }} className="cities-list">
         {cities.map(({ latitude, longitude }: any, i: number) => {
