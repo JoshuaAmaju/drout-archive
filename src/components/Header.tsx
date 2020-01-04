@@ -13,7 +13,9 @@ const Header: React.FC<HeaderProps> = props => {
   return (
     <View
       style={{
+        top: 0,
         padding: "1rem",
+        position: "sticky",
         flexDirection: "column",
         borderBottom: "1px solid #ccc"
       }}

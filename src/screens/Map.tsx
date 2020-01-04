@@ -5,7 +5,7 @@ import MapView from "../components/MapView";
 
 function Map() {
   return (
-    <View style={{ height: "100vh" }}>
+    <View style={{ height: "100vh", flexDirection: "column" }}>
       <MapView />
     </View>
   );

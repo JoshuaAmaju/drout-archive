@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import View from "./View";
-import { useLocation } from "../hooks/use-location";
 import { useMachine } from "@xstate/react";
-import Text, { TextTypes } from "./Text";
-import { weatherMachine } from "../machines/weather.machine";
-import Temperature from "./Temperature";
 import { css, StyleSheet } from "aphrodite";
-import "../styles/cities.css";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as Plus } from "../assets/svg/plus.svg";
-import Modal from "./Modal";
+import { weatherMachine } from "../machines/weather.machine";
+import "../styles/cities.css";
 import "../styles/utils.css";
-import TextInput from "./TextInput";
+import Temperature from "./Temperature";
+import Text, { TextTypes } from "./Text";
+import View from "./View";
+import Modal from "./Modal";
+import MapView from "./MapView";
 
 type CityProps = {
   latitude: number;
@@ -46,6 +45,8 @@ const City: React.FC<CityProps> = props => {
   });
 
   useEffect(() => {
+    console.log('city', latitude, longitude);
+
     send({ type: "FETCH", latitude, longitude });
   }, [send, latitude, longitude]);
 
@@ -80,7 +81,7 @@ type CitiesProps = {
 };
 
 const Cities: React.FC<CitiesProps> = props => {
-  let [open, setMode] = useState(false);
+  let [open, setOpen] = useState(false);
   let { latitude, longitude } = props.default;
   let [cities, setCity]: any = useState([{ latitude, longitude }]);
 
@@ -88,42 +89,52 @@ const Cities: React.FC<CitiesProps> = props => {
     spacer: {
       marginLeft: "1rem"
     },
-    list: {
-      "> * + *": {
-        marginLeft: "1rem"
-      }
+    button: {
+      padding: "1rem",
+      alignItems: "center",
+      borderRadius: "1rem",
+      justifyContent: "center",
+      border: "1px solid #ccc"
     }
   });
 
+  const onClose = () => setOpen(false);
+
+  const handleResult = (result: any) => {
+    console.log(result);
+    let { center } = result;
+    let [latitude, longitude] = center;
+    setCity([...cities, { latitude, longitude }]);
+  };
+
   return (
-    <View style={{ flexDirection: "column" }}>
-      <Text type={TextTypes.H2} style={{ marginBottom: "1rem" }}>
-        Locations
-      </Text>
-      <View style={{ flexWrap: "wrap" }} className="cities-list">
-        {cities.map(({ latitude, longitude }: any, i: number) => {
-          return (
-            <City
-              key={i}
-              className={i > 0 ? css(style.spacer) : ""}
-              latitude={latitude}
-              longitude={longitude}
-            />
-          );
-        })}
-        <View
-          style={{
-            padding: "1rem",
-            alignItems: "center",
-            borderRadius: "1rem",
-            justifyContent: "center",
-            border: "1px solid #ccc"
-          }}
-        >
-          <Plus width={50} />
+    <>
+      <View style={{ flexDirection: "column" }}>
+        <Text type={TextTypes.H2} style={{ marginBottom: "1rem" }}>
+          Locations
+        </Text>
+        <View style={{ flexWrap: "wrap" }} className="cities-list">
+          {cities.map(({ latitude, longitude }: any, i: number) => {
+            return (
+              <City
+                key={i}
+                latitude={latitude}
+                longitude={longitude}
+                className={i > 0 ? css(style.spacer) : ""}
+              />
+            );
+          })}
+          <button className={css(style.button)} onClick={() => setOpen(true)}>
+            <Plus width={50} />
+          </button>
         </View>
       </View>
-    </View>
+      {open && (
+        <Modal title="Add location" onClose={onClose}>
+          <MapView onResult={handleResult} />
+        </Modal>
+      )}
+    </>
   );
 };
 
